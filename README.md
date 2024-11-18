@@ -9,11 +9,6 @@
 
 ---
 
-## 📽️ Demo Video
-[Watch on YouTube](https://www.youtube.com/watch?v=bq_2-Dxu2R0)
-
----
-
 ## 🛠️ Setup Instructions
 
 ### Delphi 7
