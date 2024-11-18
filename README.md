@@ -1,67 +1,76 @@
-# Delphi_Remote_Access_PC
-Remote access in Delphi 7 and Delphi XE5 (With sharer files, CHAT and Forms Inheritance)
+# Delphi Remote Access (Delphi 7 and Delphi XE5)
 
-Acesso Remoto em Delphi 7 e Delphi XE5 (Com Compartilhador de Arquivos, CHAT e Herança de Formulários) 
+**Features:**
+- Remote Access using the **RFB algorithm** (captures only screen changes).
+- **Data Compression** for efficient communication.
+- **File Sharing** capabilities.
+- **Chat** feature for communication.
+- **Form Inheritance** to access multiple machines simultaneously in separate windows.
 
+---
 
+## 📽️ Demo Video
+[Watch on YouTube](https://www.youtube.com/watch?v=bq_2-Dxu2R0)
 
-				Esta source foi criada por Maickonn Richard.
-				Contato: senjaxus@gmail.com
-				
-				A distribuição desta source é gratuita!
-				
-				NÃO ME RESPONSABILIZO PELO MAU USO DESTA SOURCE.
+---
 
-------------------------------------------------------------------------------
+## 🛠️ Setup Instructions
 
-<strong>Recursos:</strong>
-* Acesso Remoto com algorítimo RFB (Captura apenas o que foi alterado na tela).
-* Compressões de Dados.
-* Compartilhador de Arquivos.
-* Chat.
-* Herança de Formulários (Permite que você acesse várias máquinas ao mesmo tempo em várias janelas).
+### Delphi 7
+1. Open Delphi and go to the **"Component"** menu.
+2. Click **"Install Packages..."**.
+3. Click **"Add"**.
+4. Navigate to the `Bin` folder where Delphi is installed:  
+   `C:\Program Files (x86)\Borland\Delphi7\Bin`.
+5. Select **`dclsockets70.bpl`** and click **Open**.
+6. Restart Delphi and reopen the project.
 
-<strong>Vídeo do Software:</strong>
-https://www.youtube.com/watch?v=bq_2-Dxu2R0
+### Delphi XE5
+1. Open Delphi and go to the **"Component"** menu.
+2. Click **"Install Packages..."**.
+3. Click **"Add"**.
+4. Navigate to the `Bin` folder where Delphi is installed:  
+   `C:\Program Files (x86)\Embarcadero\RAD Studio\12.0\Bin`.
+5. Select **`dclsockets190.bpl`** and click **Open**.
+6. Restart Delphi and reopen the project.
 
-------------------------------------------------------------------------------
+---
 
-#Todos os componentes utilizados são nativos do próprio Delphi.
+## 📁 Units in the Project
 
-Provavelmente quando você abrir o projeto, vai aparecer uma mensagem avisando que falta componente.
-O que você deve fazer é seguir os seguintes passos:
+- **`zLibEx.pas`**  
+  Used for data compression.  
+  *(Copy the `zLib` folder into your project directory.)*
 
+- **`StreamManager.pas`**  
+  Handles screen capture and comparison.
 
-<strong>-> Delphi 7:</strong>
-* Com o Delphi aberto, vá ao menu "Component"
-* Em seguida clique em "Install Packages..."
-* Clique no botão "Add"
-* Vá no diretório onde o Delphi está instalado e entre na pasta "Bin". ( C:\Program Files (x86)\Borland\Delphi7\Bin )
-* Selecione o arquivo "dclsockets70.bpl" e clique em Abrir.
-* Feche o Delphi e abra o projeto novamente.
+- **`SndKeys32.pas`**  
+  Simulates keyboard input.
 
-<strong>-> Delphi XE5:</strong>
-* Com o Delphi aberto, vá ao menu "Component"
-* Em seguida clique em "Install Packages..."
-* Clique no botão "Add"
-* Vá no diretório onde o Delphi está instalado e entre na pasta "Bin". ( C:\Program Files (x86)\Embarcadero\RAD Studio\12.0\bin )
-* Selecione o arquivo "dclsockets190.bpl" e clique em Abrir.
-* Feche o Delphi e abra o projeto novamente.
+---
 
+## ⚙️ How It Works
 
-<strong>Na pasta Units, você encontrará:</strong>
-* Unit <i>zLibEx.pas</i> com a pasta zLib - Usada para comprimir dados. (Você deve copiar a pasta zLib para dentro do Projeto).
-* <i>StreamManager.pas</i> - Criada para capturar a tela, e fazer a comparação.
-* <i>SndKeys32.pas</i> - Serve para simular tecla pressionada.
+1. The **Client** connects to the **Server**.  
+   - The first socket initializes and connects others (for image transfer, file operations, or remote keyboard input).  
+   - It transfers messages, mouse position, and clicks.
 
-<strong>Entendendo o funcionamento do Software.</strong>
+2. The **Server requests an initial screen capture.**  
+   - The Client captures the screen as an 8-bit **Bitmap** to reduce size.  
+   - The image is compressed with **zLib** and sent to the Server.  
+   - The image is saved in memory.
 
-* Cliente conecta com o servidor. Ao conectar o primeiro Socket ele irá conectar os outros,
-que definem se vai ser para transferência de imagens, download e upload de arquivos ou de teclado remoto.
-O primeiro Socket transfere mensagens, a posição, e o clique do mouse.
+3. Subsequent requests:  
+   - The Client compares the new capture with the previous one.  
+   - Only differences are sent, compressed to minimize data size.
 
-* Servidor pede a primeira imagem. Cliente irá capturar a tela (Captura é feita em Bitmap, 8bit para reduzir o tamanho)
-então ele irá receber uma compressão zLib. Após a compressão irá enviar a primeira
-imagem e logo após salvará a mesma na memória.
-Quando o servidor receber a imagem ele irá requisitar outra, onde o cliente irá comparar com a antiga e enviar só
-o que foi alterado. (Sempre comprimindo os dados).
+---
+
+## 📝 License
+This source code is distributed for free.  
+**Author:** Maickonn Richard  
+**Contact:** senjaxus@gmail.com  
+
+> **Disclaimer:**  
+> The author is not responsible for any misuse of this software.
